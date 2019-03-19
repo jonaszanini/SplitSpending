@@ -5,14 +5,14 @@ namespace SplitSpending.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<SplitSpending.Model.DBSpitSpendingEntities1>
+    internal sealed class Configuration : DbMigrationsConfiguration<SplitSpending.Model.DBSpitSpendingEntities>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(SplitSpending.Model.DBSpitSpendingEntities1 context)
+        protected override void Seed(SplitSpending.Model.DBSpitSpendingEntities context)
         {
             //  This method will be called after migrating to the latest version.
 

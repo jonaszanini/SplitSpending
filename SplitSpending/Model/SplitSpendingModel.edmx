@@ -4,9 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBSpitSpendingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBSpitSpending.dbo.Expenditure_TB' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+    <Schema Namespace="DBSpitSpendingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Expenditure_TB">
           <Key>
             <PropertyRef Name="Cod_Expenditure" />
@@ -79,17 +77,10 @@ warning 6002: The table/view 'DBSpitSpending.dbo.Expenditure_TB' does not have a
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DBSpitSpendingModelStoreContainer">
+          <EntitySet Name="Expenditure_TB" EntityType="Self.Expenditure_TB" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Expenses_TB" EntityType="Self.Expenses_TB" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_TB" EntityType="Self.User_TB" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Expenditure_TB" EntityType="Self.Expenditure_TB" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Expenditure_TB].[Cod_Expenditure] AS [Cod_Expenditure], 
-    [Expenditure_TB].[Cod_User_Pay] AS [Cod_User_Pay], 
-    [Expenditure_TB].[Cod_User_Used] AS [Cod_User_Used], 
-    [Expenditure_TB].[Amount] AS [Amount]
-    FROM [dbo].[Expenditure_TB] AS [Expenditure_TB]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Expenditure_TB_User_TB" Association="Self.FK_Expenditure_TB_User_TB">
             <End Role="User_TB" EntitySet="User_TB" />
             <End Role="Expenditure_TB" EntitySet="Expenditure_TB" />
@@ -103,8 +94,7 @@ warning 6002: The table/view 'DBSpitSpending.dbo.Expenditure_TB' does not have a
             <End Role="Expenses_TB" EntitySet="Expenses_TB" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBSpitSpendingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
