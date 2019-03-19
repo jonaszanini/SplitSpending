@@ -119,13 +119,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NewExpense.aspx" />
-    <Content Include="Report.aspx" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Site.css" />
     <Content Include="Model\SplitSpendingModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SplitSpendingModel.edmx</DependentUpon>
@@ -136,7 +129,14 @@
       <DependentUpon>SplitSpendingModel.edmx</DependentUpon>
       <LastGenOutput>SplitSpendingModel.cs</LastGenOutput>
     </Content>
-    <Content Include="NewUser.aspx" />
+    <Content Include="Pages\NewExpense.aspx" />
+    <Content Include="Pages\Report.aspx" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Pages\NewUser.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -192,21 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="NewExpense.aspx.cs">
-      <DependentUpon>NewExpense.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="NewExpense.aspx.designer.cs">
-      <DependentUpon>NewExpense.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Report.aspx.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Report.aspx.designer.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Expenditure_TB.cs">
       <DependentUpon>SplitSpendingModel.tt</DependentUpon>
     </Compile>
@@ -234,11 +220,26 @@
     <Compile Include="Model\User_TB.cs">
       <DependentUpon>SplitSpendingModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="NewUser.aspx.cs">
+    <Compile Include="Pages\NewExpense.aspx.cs">
+      <DependentUpon>NewExpense.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\NewExpense.aspx.designer.cs">
+      <DependentUpon>NewExpense.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Pages\Report.aspx.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Report.aspx.designer.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\NewUser.aspx.cs">
       <DependentUpon>NewUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="NewUser.aspx.designer.cs">
+    <Compile Include="Pages\NewUser.aspx.designer.cs">
       <DependentUpon>NewUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">

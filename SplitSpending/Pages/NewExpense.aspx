@@ -11,15 +11,15 @@
 
             <div class="form-group">
                 <label for="exampleFormControlInput1">Amount</label>
-                <asp:TextBox  id="amount" class="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox  id="txt_Amount" class="form-control" runat="server"></asp:TextBox>
             </div>
 
             <div class="form-group form-check">
                 <label for="exampleFormControlInput1">Who used it</label>
-                <asp:CheckBoxList ID="chb_whoUsedIt" runat="server"></asp:CheckBoxList>
+                <asp:CheckBoxList ID="chb_HoUsedIt" runat="server"></asp:CheckBoxList>
             </div>
 
         <br><br>
-        <asp:Button ID="Btn_Submit" runat="server" OnClick="Btn_Save_Click" Text="Submit" class="btn btn-primary" />
+        <asp:Button ID="btn_Submit" runat="server" OnClick="Btn_Save_Click" Text="Submit" class="btn btn-primary" />
     </div>
 </asp:Content>

@@ -5,13 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="DBSpitSpendingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBSpitSpending.dbo.Expenditure_TB' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Expenditure_TB">
           <Key>
             <PropertyRef Name="Cod_Expenditure" />
           </Key>
           <Property Name="Cod_Expenditure" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Cod_Expense" Type="int" />
-          <Property Name="Cod_User" Type="int" />
+          <Property Name="Cod_User_Pay" Type="int" />
+          <Property Name="Cod_User_Used" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Expenses_TB">
           <Key>
@@ -19,7 +22,7 @@
           </Key>
           <Property Name="Cod_Expense" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Cod_User" Type="int" />
-          <Property Name="Amount" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -39,18 +42,6 @@
           <Property Name="Name" Type="nchar" MaxLength="30" />
           <Property Name="Bank_Account" Type="nchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_Expenditure_TB_Expenses_TB">
-          <End Role="Expenses_TB" Type="Self.Expenses_TB" Multiplicity="0..1" />
-          <End Role="Expenditure_TB" Type="Self.Expenditure_TB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Expenses_TB">
-              <PropertyRef Name="Cod_Expense" />
-            </Principal>
-            <Dependent Role="Expenditure_TB">
-              <PropertyRef Name="Cod_Expense" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Expenditure_TB_User_TB">
           <End Role="User_TB" Type="Self.User_TB" Multiplicity="0..1" />
           <End Role="Expenditure_TB" Type="Self.Expenditure_TB" Multiplicity="*" />
@@ -59,7 +50,19 @@
               <PropertyRef Name="Cod_User" />
             </Principal>
             <Dependent Role="Expenditure_TB">
+              <PropertyRef Name="Cod_User_Pay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Expenditure_TB_User_TB1">
+          <End Role="User_TB" Type="Self.User_TB" Multiplicity="0..1" />
+          <End Role="Expenditure_TB" Type="Self.Expenditure_TB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_TB">
               <PropertyRef Name="Cod_User" />
+            </Principal>
+            <Dependent Role="Expenditure_TB">
+              <PropertyRef Name="Cod_User_Used" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -76,15 +79,22 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DBSpitSpendingModelStoreContainer">
-          <EntitySet Name="Expenditure_TB" EntityType="Self.Expenditure_TB" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Expenses_TB" EntityType="Self.Expenses_TB" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_TB" EntityType="Self.User_TB" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Expenditure_TB_Expenses_TB" Association="Self.FK_Expenditure_TB_Expenses_TB">
-            <End Role="Expenses_TB" EntitySet="Expenses_TB" />
+          <EntitySet Name="Expenditure_TB" EntityType="Self.Expenditure_TB" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Expenditure_TB].[Cod_Expenditure] AS [Cod_Expenditure], 
+    [Expenditure_TB].[Cod_User_Pay] AS [Cod_User_Pay], 
+    [Expenditure_TB].[Cod_User_Used] AS [Cod_User_Used], 
+    [Expenditure_TB].[Amount] AS [Amount]
+    FROM [dbo].[Expenditure_TB] AS [Expenditure_TB]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Expenditure_TB_User_TB" Association="Self.FK_Expenditure_TB_User_TB">
+            <End Role="User_TB" EntitySet="User_TB" />
             <End Role="Expenditure_TB" EntitySet="Expenditure_TB" />
           </AssociationSet>
-          <AssociationSet Name="FK_Expenditure_TB_User_TB" Association="Self.FK_Expenditure_TB_User_TB">
+          <AssociationSet Name="FK_Expenditure_TB_User_TB1" Association="Self.FK_Expenditure_TB_User_TB1">
             <End Role="User_TB" EntitySet="User_TB" />
             <End Role="Expenditure_TB" EntitySet="Expenditure_TB" />
           </AssociationSet>
@@ -98,24 +108,13 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBSpitSpendingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Expenditure_TB">
-          <Key>
-            <PropertyRef Name="Cod_Expenditure" />
-          </Key>
-          <Property Name="Cod_Expenditure" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Cod_Expense" Type="Int32" />
-          <Property Name="Cod_User" Type="Int32" />
-          <NavigationProperty Name="Expenses_TB" Relationship="Self.FK_Expenditure_TB_Expenses_TB" FromRole="Expenditure_TB" ToRole="Expenses_TB" />
-          <NavigationProperty Name="User_TB" Relationship="Self.FK_Expenditure_TB_User_TB" FromRole="Expenditure_TB" ToRole="User_TB" />
-        </EntityType>
         <EntityType Name="Expenses_TB">
           <Key>
             <PropertyRef Name="Cod_Expense" />
           </Key>
           <Property Name="Cod_Expense" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Cod_User" Type="Int32" />
-          <Property Name="Amount" Type="Int32" />
-          <NavigationProperty Name="Expenditure_TB" Relationship="Self.FK_Expenditure_TB_Expenses_TB" FromRole="Expenses_TB" ToRole="Expenditure_TB" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="User_TB" Relationship="Self.FK_Expenses_TB_User_TB" FromRole="Expenses_TB" ToRole="User_TB" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -135,33 +134,21 @@
           <Property Name="Cod_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="Bank_Account" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Expenditure_TB" Relationship="Self.FK_Expenditure_TB_User_TB" FromRole="User_TB" ToRole="Expenditure_TB" />
           <NavigationProperty Name="Expenses_TB" Relationship="Self.FK_Expenses_TB_User_TB" FromRole="User_TB" ToRole="Expenses_TB" />
+          <NavigationProperty Name="Expenditure_TB" Relationship="Self.FK_Expenditure_TB_User_TB" FromRole="User_TB" ToRole="Expenditure_TB" />
+          <NavigationProperty Name="Expenditure_TB1" Relationship="Self.FK_Expenditure_TB_User_TB1" FromRole="User_TB" ToRole="Expenditure_TB" />
         </EntityType>
-        <Association Name="FK_Expenditure_TB_Expenses_TB">
-          <End Role="Expenses_TB" Type="Self.Expenses_TB" Multiplicity="0..1" />
-          <End Role="Expenditure_TB" Type="Self.Expenditure_TB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Expenses_TB">
-              <PropertyRef Name="Cod_Expense" />
-            </Principal>
-            <Dependent Role="Expenditure_TB">
-              <PropertyRef Name="Cod_Expense" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Expenditure_TB_User_TB">
-          <End Role="User_TB" Type="Self.User_TB" Multiplicity="0..1" />
-          <End Role="Expenditure_TB" Type="Self.Expenditure_TB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User_TB">
-              <PropertyRef Name="Cod_User" />
-            </Principal>
-            <Dependent Role="Expenditure_TB">
-              <PropertyRef Name="Cod_User" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="Expenditure_TB">
+          <Key>
+            <PropertyRef Name="Cod_Expenditure" />
+          </Key>
+          <Property Name="Cod_Expenditure" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cod_User_Pay" Type="Int32" />
+          <Property Name="Cod_User_Used" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="User_TB" Relationship="Self.FK_Expenditure_TB_User_TB" FromRole="Expenditure_TB" ToRole="User_TB" />
+          <NavigationProperty Name="User_TB1" Relationship="Self.FK_Expenditure_TB_User_TB1" FromRole="Expenditure_TB" ToRole="User_TB" />
+        </EntityType>
         <Association Name="FK_Expenses_TB_User_TB">
           <End Role="User_TB" Type="Self.User_TB" Multiplicity="0..1" />
           <End Role="Expenses_TB" Type="Self.Expenses_TB" Multiplicity="*" />
@@ -174,22 +161,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DBSpitSpendingEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Expenditure_TB" EntityType="Self.Expenditure_TB" />
+        <Association Name="FK_Expenditure_TB_User_TB">
+          <End Role="User_TB" Type="Self.User_TB" Multiplicity="0..1" />
+          <End Role="Expenditure_TB" Type="Self.Expenditure_TB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_TB">
+              <PropertyRef Name="Cod_User" />
+            </Principal>
+            <Dependent Role="Expenditure_TB">
+              <PropertyRef Name="Cod_User_Pay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Expenditure_TB_User_TB1">
+          <End Role="User_TB" Type="Self.User_TB" Multiplicity="0..1" />
+          <End Role="Expenditure_TB" Type="Self.Expenditure_TB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_TB">
+              <PropertyRef Name="Cod_User" />
+            </Principal>
+            <Dependent Role="Expenditure_TB">
+              <PropertyRef Name="Cod_User_Used" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBSpitSpendingEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Expenses_TB" EntityType="Self.Expenses_TB" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="User_TB" EntityType="Self.User_TB" />
-          <AssociationSet Name="FK_Expenditure_TB_Expenses_TB" Association="Self.FK_Expenditure_TB_Expenses_TB">
+          <EntitySet Name="Expenditure_TB" EntityType="Self.Expenditure_TB" />
+          <AssociationSet Name="FK_Expenses_TB_User_TB" Association="Self.FK_Expenses_TB_User_TB">
+            <End Role="User_TB" EntitySet="User_TB" />
             <End Role="Expenses_TB" EntitySet="Expenses_TB" />
-            <End Role="Expenditure_TB" EntitySet="Expenditure_TB" />
           </AssociationSet>
           <AssociationSet Name="FK_Expenditure_TB_User_TB" Association="Self.FK_Expenditure_TB_User_TB">
             <End Role="User_TB" EntitySet="User_TB" />
             <End Role="Expenditure_TB" EntitySet="Expenditure_TB" />
           </AssociationSet>
-          <AssociationSet Name="FK_Expenses_TB_User_TB" Association="Self.FK_Expenses_TB_User_TB">
+          <AssociationSet Name="FK_Expenditure_TB_User_TB1" Association="Self.FK_Expenditure_TB_User_TB1">
             <End Role="User_TB" EntitySet="User_TB" />
-            <End Role="Expenses_TB" EntitySet="Expenses_TB" />
+            <End Role="Expenditure_TB" EntitySet="Expenditure_TB" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -197,16 +208,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DBSpitSpendingModelStoreContainer" CdmEntityContainer="DBSpitSpendingEntities1">
-          <EntitySetMapping Name="Expenditure_TB">
-            <EntityTypeMapping TypeName="DBSpitSpendingModel.Expenditure_TB">
-              <MappingFragment StoreEntitySet="Expenditure_TB">
-                <ScalarProperty Name="Cod_Expenditure" ColumnName="Cod_Expenditure" />
-                <ScalarProperty Name="Cod_Expense" ColumnName="Cod_Expense" />
-                <ScalarProperty Name="Cod_User" ColumnName="Cod_User" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="DBSpitSpendingModelStoreContainer" CdmEntityContainer="DBSpitSpendingEntities">
           <EntitySetMapping Name="Expenses_TB">
             <EntityTypeMapping TypeName="DBSpitSpendingModel.Expenses_TB">
               <MappingFragment StoreEntitySet="Expenses_TB">
@@ -233,6 +235,16 @@
                 <ScalarProperty Name="Cod_User" ColumnName="Cod_User" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Bank_Account" ColumnName="Bank_Account" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expenditure_TB">
+            <EntityTypeMapping TypeName="DBSpitSpendingModel.Expenditure_TB">
+              <MappingFragment StoreEntitySet="Expenditure_TB">
+                <ScalarProperty Name="Cod_Expenditure" ColumnName="Cod_Expenditure" />
+                <ScalarProperty Name="Cod_User_Pay" ColumnName="Cod_User_Pay" />
+                <ScalarProperty Name="Cod_User_Used" ColumnName="Cod_User_Used" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

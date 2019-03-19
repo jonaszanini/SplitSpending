@@ -17,7 +17,7 @@ namespace SplitSpending
 
         protected void LoadUsers()
         {
-            using (DBSpitSpendingEntities1 context = new DBSpitSpendingEntities1())
+            using (DBSpitSpendingEntities context = new DBSpitSpendingEntities())
             {
                 var users = context.User_TB.Where(s => s.Cod_User != 0).ToList();
             }
@@ -27,14 +27,14 @@ namespace SplitSpending
 
         protected void Btn_Save_Click(object sender, EventArgs e)
         {
-            using (DBSpitSpendingEntities1 context = new DBSpitSpendingEntities1())
+            User_TB user = new User_TB
             {
-                User_TB user = new User_TB
-                {
-                    Name = name.Text,
-                    Bank_Account = bankAccount.Text
-                };
+                Name = name.Text,
+                Bank_Account = bankAccount.Text
+            };
 
+            using (DBSpitSpendingEntities context = new DBSpitSpendingEntities())
+            {
                 context.User_TB.Add(user);
                 context.SaveChanges();
 

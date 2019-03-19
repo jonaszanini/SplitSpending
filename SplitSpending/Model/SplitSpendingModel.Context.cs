@@ -13,10 +13,10 @@ namespace SplitSpending.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBSpitSpendingEntities1 : DbContext
+    public partial class DBSpitSpendingEntities : DbContext
     {
-        public DBSpitSpendingEntities1()
-            : base("name=DBSpitSpendingEntities1")
+        public DBSpitSpendingEntities()
+            : base("name=DBSpitSpendingEntities")
         {
         }
     
@@ -25,9 +25,9 @@ namespace SplitSpending.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Expenditure_TB> Expenditure_TB { get; set; }
         public virtual DbSet<Expenses_TB> Expenses_TB { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User_TB> User_TB { get; set; }
+        public virtual DbSet<Expenditure_TB> Expenditure_TB { get; set; }
     }
 }

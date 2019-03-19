@@ -15,10 +15,11 @@ namespace SplitSpending.Model
     public partial class Expenditure_TB
     {
         public int Cod_Expenditure { get; set; }
-        public Nullable<int> Cod_Expense { get; set; }
-        public Nullable<int> Cod_User { get; set; }
+        public Nullable<int> Cod_User_Pay { get; set; }
+        public Nullable<int> Cod_User_Used { get; set; }
+        public Nullable<decimal> Amount { get; set; }
     
-        public virtual Expenses_TB Expenses_TB { get; set; }
         public virtual User_TB User_TB { get; set; }
+        public virtual User_TB User_TB1 { get; set; }
     }
 }

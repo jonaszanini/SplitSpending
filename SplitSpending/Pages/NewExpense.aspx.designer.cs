@@ -22,30 +22,30 @@ namespace SplitSpending {
         protected global::System.Web.UI.WebControls.DropDownList ddl_WhoSpent;
         
         /// <summary>
-        /// amount control.
+        /// txt_Amount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox amount;
+        protected global::System.Web.UI.WebControls.TextBox txt_Amount;
         
         /// <summary>
-        /// chb_whoUsedIt control.
+        /// chb_HoUsedIt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList chb_whoUsedIt;
+        protected global::System.Web.UI.WebControls.CheckBoxList chb_HoUsedIt;
         
         /// <summary>
-        /// Btn_Submit control.
+        /// btn_Submit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Btn_Submit;
+        protected global::System.Web.UI.WebControls.Button btn_Submit;
     }
 }

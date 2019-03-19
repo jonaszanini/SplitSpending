@@ -14,18 +14,10 @@ namespace SplitSpending.Model
     
     public partial class Expenses_TB
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Expenses_TB()
-        {
-            this.Expenditure_TB = new HashSet<Expenditure_TB>();
-        }
-    
         public int Cod_Expense { get; set; }
         public Nullable<int> Cod_User { get; set; }
         public Nullable<decimal> Amount { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Expenditure_TB> Expenditure_TB { get; set; }
         public virtual User_TB User_TB { get; set; }
     }
 }

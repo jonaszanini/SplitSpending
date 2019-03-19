@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="07d31726e81341369d08e2e6ee0c5173" Name="Diagram1">
-        <EntityTypeShape EntityType="DBSpitSpendingModel.Expenditure_TB" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBSpitSpendingModel.Expenses_TB" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBSpitSpendingModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="c951e55dfcc14d6bb214a534ebd00cf8" Name="Diagram1">
+        <EntityTypeShape EntityType="DBSpitSpendingModel.Expenses_TB" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBSpitSpendingModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBSpitSpendingModel.User_TB" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
-        <AssociationConnector Association="DBSpitSpendingModel.FK_Expenditure_TB_Expenses_TB" ManuallyRouted="false" />
-        <AssociationConnector Association="DBSpitSpendingModel.FK_Expenditure_TB_User_TB" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBSpitSpendingModel.Expenditure_TB" Width="1.5" PointX="4" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="DBSpitSpendingModel.FK_Expenses_TB_User_TB" ManuallyRouted="false" />
+        <AssociationConnector Association="DBSpitSpendingModel.FK_Expenditure_TB_User_TB" ManuallyRouted="false" />
+        <AssociationConnector Association="DBSpitSpendingModel.FK_Expenditure_TB_User_TB1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

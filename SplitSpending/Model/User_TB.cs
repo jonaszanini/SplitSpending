@@ -17,8 +17,9 @@ namespace SplitSpending.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User_TB()
         {
-            this.Expenditure_TB = new HashSet<Expenditure_TB>();
             this.Expenses_TB = new HashSet<Expenses_TB>();
+            this.Expenditure_TB = new HashSet<Expenditure_TB>();
+            this.Expenditure_TB1 = new HashSet<Expenditure_TB>();
         }
     
         public int Cod_User { get; set; }
@@ -26,8 +27,10 @@ namespace SplitSpending.Model
         public string Bank_Account { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Expenses_TB> Expenses_TB { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Expenditure_TB> Expenditure_TB { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Expenses_TB> Expenses_TB { get; set; }
+        public virtual ICollection<Expenditure_TB> Expenditure_TB1 { get; set; }
     }
 }
