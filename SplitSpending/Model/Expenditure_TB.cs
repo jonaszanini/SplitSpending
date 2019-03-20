@@ -18,6 +18,7 @@ namespace SplitSpending.Model
         public Nullable<int> Cod_User_Pay { get; set; }
         public Nullable<int> Cod_User_Used { get; set; }
         public Nullable<decimal> Amount { get; set; }
+        public Nullable<int> Cod_Expense { get; set; }
     
         public virtual User_TB User_TB { get; set; }
         public virtual User_TB User_TB1 { get; set; }

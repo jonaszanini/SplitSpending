@@ -92,15 +92,35 @@ namespace SplitSpending
                     ExpenditureList.Remove(expenditureToCompare);
                 }
 
+                if (ExpenditureList.Any(exp => exp.Cod_User_Pay == newExpenditure.Cod_User_Pay && exp.Cod_User_Used == newExpenditure.Cod_User_Used))
+                {
+                    Expenditure_TB expenditureToCompare = new Expenditure_TB();
 
+                    expenditureToCompare = ExpenditureList.FirstOrDefault(exp => exp.Cod_User_Pay == newExpenditure.Cod_User_Pay && exp.Cod_User_Used == newExpenditure.Cod_User_Used);
 
+                    finalAmount = newExpenditure.Amount + expenditureToCompare.Amount;
+                    finalDebtors = newExpenditure.Cod_User_Used;
+                    finalReceiver = newExpenditure.Cod_User_Pay;
+
+                    ExpenditureList.Remove(expenditureToCompare);
+                }
+                
                 newExpenditure.Amount = finalAmount;
                 newExpenditure.Cod_User_Pay = finalReceiver;
                 newExpenditure.Cod_User_Used = finalDebtors;
 
-                ExpenditureList.Add(newExpenditure);
+                if (newExpenditure.Cod_User_Pay != newExpenditure.Cod_User_Used)
+                {
+                    ExpenditureList.Add(newExpenditure);
+                }
+                
             }
 
+        }
+
+        private bool CheckifSamePerson(Expenditure_TB expenditure)
+        {
+            return (expenditure.Cod_User_Pay == expenditure.Cod_User_Used);
         }
 
     }

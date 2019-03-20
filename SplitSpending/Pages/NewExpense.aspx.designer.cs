@@ -31,6 +31,15 @@ namespace SplitSpending {
         protected global::System.Web.UI.WebControls.TextBox txt_Amount;
         
         /// <summary>
+        /// txt_Description control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_Description;
+        
+        /// <summary>
         /// chb_HoUsedIt control.
         /// </summary>
         /// <remarks>
@@ -47,5 +56,14 @@ namespace SplitSpending {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_Submit;
+        
+        /// <summary>
+        /// gdc_Expenses control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gdc_Expenses;
     }
 }

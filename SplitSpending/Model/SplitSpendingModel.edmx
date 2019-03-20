@@ -13,6 +13,7 @@
           <Property Name="Cod_User_Pay" Type="int" />
           <Property Name="Cod_User_Used" Type="int" />
           <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Cod_Expense" Type="int" />
         </EntityType>
         <EntityType Name="Expenses_TB">
           <Key>
@@ -21,6 +22,7 @@
           <Property Name="Cod_Expense" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Cod_User" Type="int" />
           <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Description" Type="nchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -106,6 +108,7 @@
           <Property Name="Cod_User" Type="Int32" />
           <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="User_TB" Relationship="Self.FK_Expenses_TB_User_TB" FromRole="Expenses_TB" ToRole="User_TB" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -138,6 +141,7 @@
           <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="User_TB" Relationship="Self.FK_Expenditure_TB_User_TB" FromRole="Expenditure_TB" ToRole="User_TB" />
           <NavigationProperty Name="User_TB1" Relationship="Self.FK_Expenditure_TB_User_TB1" FromRole="Expenditure_TB" ToRole="User_TB" />
+          <Property Name="Cod_Expense" Type="Int32" />
         </EntityType>
         <Association Name="FK_Expenses_TB_User_TB">
           <End Role="User_TB" Type="Self.User_TB" Multiplicity="0..1" />
@@ -202,6 +206,7 @@
           <EntitySetMapping Name="Expenses_TB">
             <EntityTypeMapping TypeName="DBSpitSpendingModel.Expenses_TB">
               <MappingFragment StoreEntitySet="Expenses_TB">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Cod_Expense" ColumnName="Cod_Expense" />
                 <ScalarProperty Name="Cod_User" ColumnName="Cod_User" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -231,6 +236,7 @@
           <EntitySetMapping Name="Expenditure_TB">
             <EntityTypeMapping TypeName="DBSpitSpendingModel.Expenditure_TB">
               <MappingFragment StoreEntitySet="Expenditure_TB">
+                <ScalarProperty Name="Cod_Expense" ColumnName="Cod_Expense" />
                 <ScalarProperty Name="Cod_Expenditure" ColumnName="Cod_Expenditure" />
                 <ScalarProperty Name="Cod_User_Pay" ColumnName="Cod_User_Pay" />
                 <ScalarProperty Name="Cod_User_Used" ColumnName="Cod_User_Used" />
