@@ -28,7 +28,7 @@ namespace SplitSpending
         {
             using (DBSpitSpendingEntities context = new DBSpitSpendingEntities())
             {
-                gdc_Expenses.DataSource = context.Expenses_TB.Where(exp => exp.Cod_Expense != 0).ToList();
+                gdc_Expenses.DataSource = context.Expenses_TB.Where(exp => exp.Cod_Expense != 0).ToList().OrderBy(ex => ex.Cod_User);
                 gdc_Expenses.DataBind();
             }
         }
